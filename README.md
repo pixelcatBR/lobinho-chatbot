@@ -1,5 +1,5 @@
 # Lobinho chatbot
-Ele é um chatbot que fiz para estudar um pouco python, flask e subprocess para fazer projetos maiores no futuro
+Ele é um chatbot que fiz para estudar um pouco python, flask e subprocess para fazer projetos maiores no futuro quando eu souber mais
 
 # o que ele incluí
 ele inclui uma interface web onde dá de digitar em um ```<input>``` e ele será jogado num ollama que aparece a resposta na interface web.
