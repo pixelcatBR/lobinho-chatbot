@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lobinho ChatBot</title>
+    <style>
+        body {
+            background-color: rgb(105, 66, 51);
+        }
+
+        .type-text {
+            margin: 50px;
+            text-align: center;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .textbox {
+            display: flex; 
+            justify-content: center; 
+            align-items: flex-end; 
+            height: 65px; 
+            padding-bottom: 50px;
+        }
+        
+        .ai-text {
+            text-align: center;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 0 70px;
+            height: 700px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scrollbar-width: thin;
+            scrollbar-color: #c0a080 #4a3328;
+        }
+        
+        /* Estilização da barra de rolagem para navegadores WebKit */
+        .ai-text::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .ai-text::-webkit-scrollbar-track {
+            background: #4a3328;
+            border-radius: 10px;
+        }
+        
+        .ai-text::-webkit-scrollbar-thumb {
+            background: #c0a080;
+            border-radius: 10px;
+        }
+        
+        .ai-text::-webkit-scrollbar-thumb:hover {
+            background: #d4b898;
+        }
+        
+        /* Container das mensagens */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        /* Balão do usuário (alinhado à direita) */
+        .user-message {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+        
+        .user-bubble {
+            background-color: #ffffff;
+            color: #4a3328;
+            padding: 12px 18px;
+            border-radius: 20px 20px 5px 20px;
+            max-width: 70%;
+            word-wrap: break-word;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            font-weight: bold;
+        }
+        
+        /* Balão do Lobinho (alinhado à esquerda) */
+        .lobinho-message {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .lobinho-bubble {
+            background-color: rgba(255, 255, 255, 0.95);
+            color: #4a3328;
+            padding: 12px 18px;
+            border-radius: 20px 20px 20px 5px;
+            max-width: 70%;
+            word-wrap: break-word;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        /* Estilo para os ícones */
+        .message-icon {
+            font-size: 24px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        
+        .user-icon {
+            margin-left: 8px;
+        }
+        
+        /* Separador entre mensagens */
+        .separator {
+            margin: 15px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .textbox input {
+            width: 800px;
+            padding: 15px;
+            font-size: 16px;
+            border-radius: 25px;
+            border: 2px solid #ccc;
+            background-color: rgb(138, 76, 54);
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+        
+        .textbox input:focus {
+            outline: none;
+            border-color: #ffffff;
+        }
+        
+        .textbox input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .textbox button {
+            margin-left: 10px;
+            padding: 15px 20px;
+            font-size: 16px;
+            border-radius: 25px;
+            border: none;
+            background-color: #ffffff;
+            color: #4a3328;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .textbox button:hover {
+            background-color: #ffffff;
+        }
+        
+        /* Nome do usuário pequeno */
+        .message-label {
+            font-size: 11px;
+            margin-bottom: 3px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="type-text">
+        <h1>🐶 Digite o que quer falar para o Lobinho chatbot 🐶</h1>
+    </div>
+    
+    <div class="ai-text">
+        <div class="chat-container">
+            {% if conversation %}
+                {% for msg in conversation %}
+                    {% if msg.role == 'user' %}
+                        <!-- Balão do usuário -->
+                        <div class="user-message">
+                            <div class="user-bubble">
+                                <div class="message-label">Você 🐕</div>
+                                {{ msg.content }}
+                            </div>
+                        </div>
+                    {% else %}
+                        <!-- Balão do Lobinho -->
+                        <div class="lobinho-message">
+                            <div class="lobinho-bubble">
+                                <div class="message-label">🤖 Lobinho</div>
+                                {{ msg.content }}
+                            </div>
+                        </div>
+                        <div class="separator"></div>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <!-- Mensagem inicial em balão -->
+                <div class="lobinho-message">
+                    <div class="lobinho-bubble">
+                        <div class="message-label">🤖 Lobinho</div>
+                        Olá! Me pergunte qualquer coisa! 🐶
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="textbox">
+        <form action="/user_input" method="get">
+            <input type="text" name="user_input" placeholder="digite o que quer falar para o Lobinho chatbot">
+            <button type="submit">Enviar</button>
+        </form>
+        <form action="/clear" method="get">
+            <button type="submit">Limpar Conversa</button>
+        </form>
+    </div>
+</body>
+</html>
