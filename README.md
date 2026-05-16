@@ -42,5 +42,5 @@ e após tudo isso execute o main.py
 python3 main.py
 ```
 # contribuição
-contribua com meus projetos como este aqui fazendo pull requests e insues.
+contribua com meus projetos como este aqui fazendo pull requests e forks.
 
