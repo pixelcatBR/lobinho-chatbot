@@ -2,7 +2,7 @@
 Ele é um chatbot que fiz para estudar um pouco python, flask e subprocess para fazer projetos maiores no futuro
 
 # o que ele incluí
-ele inclui uma interface web onde dá de digitar em um <input> e ele será jogado num ollama que aparece a resposta na interface web.
+ele inclui uma interface web onde dá de digitar em um ```<input>``` e ele será jogado num ollama que aparece a resposta na interface web.
 ele consegue listar o histórico de conversas com sintaxe jinja2 e variáveis ```conversation``` e ```historico```
 
 # licença
